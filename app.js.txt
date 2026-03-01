@@ -1,0 +1,81 @@
+let connected = false;
+let localStream = null;
+
+// Page 1 → Page 2
+function goNext(){
+  const name = userName.value.trim();
+  if(!name){
+    alert("Enter your name");
+    return;
+  }
+
+  page1.classList.add("hidden");
+  page2.classList.remove("hidden");
+
+  avatar.innerText = name[0].toUpperCase();
+
+  const code = Math.random().toString(36).substring(2,7).toUpperCase();
+  myCode.innerText = code;
+}
+
+// Fake connect (demo)
+friendCode.addEventListener("input", e=>{
+  if(e.target.value.length === 5){
+    status.innerText = "Connected";
+    connected = true;
+    voiceBtn.classList.remove("hidden");
+  }
+});
+
+// Multiple file send (demo)
+function sendFiles(){
+  if(!connected){
+    alert("Not connected");
+    return;
+  }
+
+  const files = fileInput.files;
+  if(files.length === 0){
+    alert("Select files");
+    return;
+  }
+
+  if(files.length > 7){
+    alert("Max 7 files allowed");
+    return;
+  }
+
+  progressBox.classList.remove("hidden");
+  successMsg.classList.add("hidden");
+  progressBar.value = 0;
+
+  let p = 0;
+  const timer = setInterval(()=>{
+    p += 10;
+    progressBar.value = p;
+
+    if(p >= 100){
+      clearInterval(timer);
+      progressBox.classList.add("hidden");
+      successMsg.classList.remove("hidden");
+    }
+  },200);
+}
+
+// Voice (local mic demo)
+async function startVoice(){
+  voiceBtn.classList.add("hidden");
+  endVoiceBtn.classList.remove("hidden");
+
+  localStream = await navigator.mediaDevices.getUserMedia({audio:true});
+  alert("Microphone ON (demo)");
+}
+
+function endVoice(){
+  if(localStream){
+    localStream.getTracks().forEach(t=>t.stop());
+  }
+  endVoiceBtn.classList.add("hidden");
+  voiceBtn.classList.remove("hidden");
+  alert("Voice stopped");
+}
