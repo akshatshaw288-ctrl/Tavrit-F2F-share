@@ -1,0 +1,47 @@
+<div class="app">
+
+  <!-- PAGE 1 -->
+  <div id="page1" class="page">
+    <h1 class="title">Tavrit F2F Share</h1>
+    <p class="subtitle">Fast • Secure • Browser Based</p>
+
+    <input id="userName" placeholder="ENTER YOUR NAME" />
+    <button class="primary" onclick="goNext()">NEXT</button>
+  </div>
+
+  <!-- PAGE 2 -->
+  <div id="page2" class="page hidden">
+
+    <div id="avatar" class="avatar"></div>
+
+    <div class="codeBox">
+      <span>Your Code</span>
+      <div id="myCode" class="code">ABCDE</div>
+    </div>
+
+    <input id="friendCode" maxlength="5" placeholder="ENTER FRIEND CODE" />
+    <p id="status" class="status">Waiting for connection...</p>
+
+    <input type="file" id="fileInput" multiple />
+    <button class="primary" onclick="sendFiles()">SEND FILES</button>
+
+    <!-- Progress -->
+    <div id="progressBox" class="progress hidden">
+      <progress id="progressBar" value="0" max="100"></progress>
+      <span>Sending...</span>
+    </div>
+
+    <div id="successMsg" class="success hidden">
+      ✔ Files Sent Successfully
+    </div>
+
+    <!-- VOICE -->
+    <button id="voiceBtn" class="primary hidden" onclick="startVoice()">
+      🎙️ START VOICE
+    </button>
+    <button id="endVoiceBtn" class="primary danger hidden" onclick="endVoice()">
+      ❌ END CALL
+    </button>
+
+  </div>
+</div>
